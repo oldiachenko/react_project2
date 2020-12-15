@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import UserServices from "../services/UserServices";
+import UserServices from "../../services/UserServices";
 import User from "../user/User";
 import './AllUsers.css'
 import {Route, Switch, withRouter} from "react-router-dom";

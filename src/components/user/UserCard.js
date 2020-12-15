@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import UserServices from "../services/UserServices";
+import UserServices from "../../services/UserServices";
 import './UserCard.css'
 import {Link, Route, withRouter} from "react-router-dom";
 import Posts from "../posts/Posts";
