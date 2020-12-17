@@ -4,6 +4,12 @@ export default class PostServices {
 
   getPost (id) {
     return fetch(this.url +`/${id}`)
-      .then(value => value.json())
+      .then(value => {
+        if (value.status === 200) {
+          return value.json()
+        } else {
+          throw new Error('Unavailable data')
+        }
+      })
   }
 }

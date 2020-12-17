@@ -19,10 +19,13 @@ class FormUser extends Component {
   async selectUser(id) {
     try{
       let user = await this.userServices.user(id)
-      this.setState({user})
+      if (!user.ok) {
+       throw new Error('Data unavailable')
+      }
+      this.setState({user, error:false})
     }
       catch (e) {
-      e ? this.setState({error: true}) : this.setState({error: false})
+      this.setState({error: true})
       }
 
   }

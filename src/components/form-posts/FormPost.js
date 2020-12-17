@@ -7,7 +7,7 @@ class FormPost extends Component {
   postForm = React.createRef();
   postServices = new PostServices();
 
-  state = {inputValue: '', post: null}
+  state = {inputValue: '', post: null, error: false}
 
   prevDefault = (e) => {
     e.preventDefault()
@@ -17,13 +17,19 @@ class FormPost extends Component {
   }
 
   async selectPost(id) {
-    let post = await this.postServices.getPost(id)
-    this.setState({post})
+    try {
+      let post = await this.postServices.getPost(id)
+      this.setState({post, error:false})
+    }
+    catch (error) {
+      this.setState({error:true})
+    }
   }
 
 
   render() {
-    let {inputValue, post} = this.state;
+    let {inputValue, post, error} = this.state;
+    const onError = error ? 'Unavailable data' : null
     return (
       <div>
         <form onSubmit={this.prevDefault} ref={this.postForm}>
@@ -31,9 +37,8 @@ class FormPost extends Component {
           <button onClick={() => this.selectPost(this.postForm.current[0].value)}>Get Post</button>
         </form>
         <br/>
-        {
-          post && <Post item={post} key={post.id}/>
-        }
+        {post && !error && <Post item={post} key={post.id}/>}
+        {onError}
 
       </div>
     );
