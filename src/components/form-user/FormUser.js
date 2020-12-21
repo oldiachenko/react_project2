@@ -19,12 +19,9 @@ class FormUser extends Component {
   async selectUser(id) {
     try{
       let user = await this.userServices.user(id)
-      if (!user.ok) {
-       throw new Error('Data unavailable')
-      }
       this.setState({user, error:false})
     }
-      catch (e) {
+      catch (error) {
       this.setState({error: true})
       }
 
@@ -32,6 +29,7 @@ class FormUser extends Component {
 
   render() {
     let {user, inputValue, error} = this.state;
+    const onError = error ? 'Unavailable data' : null;
     console.log(error);
     return (
       <div>
@@ -43,7 +41,8 @@ class FormUser extends Component {
           </button>
         </form>
         <br/>
-        {user && <User item={user} key={user.id}/>}
+        {user && !error && <User item={user} key={user.id}/>}
+        {onError}
       </div>
     );
   }
