@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import Counter from "./components/Counter";
 import Person from "./components/Person";
 import Todo from "./components/Todo";
+import './App.css'
+import TestUseEffect from "./components/TestUseEffect";
+import UseMemo from "./components/UseMemo";
 
 class App extends Component {
   render() {
@@ -11,8 +14,14 @@ class App extends Component {
         <br/>
         <Person/>
         <br/>
-        <h3>Use Reducer</h3>
+        <h2 className={'hookName'}>Use Reducer</h2>
         <Todo/>
+        <br/>
+        <h2 className={'hookName'}>Use Effect (Did Mount, Will Unmount) </h2>
+        <TestUseEffect/>
+        <br/>
+        <h2 className={'hookName'}>Use Memo</h2>
+        <UseMemo/>
       </div>
     );
   }
